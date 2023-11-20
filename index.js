@@ -2,7 +2,6 @@ function showError(message) {
     errorContainer.textContent = "";
     errorContainer.textContent = message;
   }
-  
   //  targeting elements
   let errorContainer = document.querySelector(".error-msg");
   let form = document.getElementById("formData");
@@ -13,16 +12,13 @@ function showError(message) {
   let checkBox = document.getElementById("agree");
   let tableBody = document.getElementById("tableBody");
   let btn = document.getElementById("submit");
-  
   //validation functions
-  
   function isNameEmpty(name) {
     return name === "";
   }
   function isEmailEmpty(email) {
     return email === "";
   }
-  
   function isPasswordEmpty(password) {
     return password == "";
   }
@@ -35,9 +31,7 @@ function showError(message) {
     let userAge = currentDate.getFullYear() - userDob.getFullYear();
     return userAge < 18 || userAge > 55;
   }
-  
   //responding to submit event
-  
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     let name = userName.value;
@@ -45,7 +39,6 @@ function showError(message) {
     let userPassword = password.value;
     let userDob = dob.value;
     let acceptedTerms = checkBox.checked;
-  
     if (isNameEmpty(name)) {
       showError("Name Cannot Be Empty, Please Fill That field");
       return;
@@ -54,7 +47,6 @@ function showError(message) {
       showError("Email is Required, Please Fill That Field");
       return;
     }
-  
     if (isPasswordEmpty(userPassword)) {
       showError("Please Fill The Password");
       return;
@@ -67,9 +59,7 @@ function showError(message) {
       showError("Your Age Should be Between 18 and 55");
       return;
     }
-  
     showError("");
-  
     let userDetails = {
       uName: name,
       uEmail: userEmail,
@@ -79,6 +69,7 @@ function showError(message) {
     };
     let storedData = JSON.parse(localStorage.getItem("userDetailsArray")) || [];
     storedData.push(userDetails);
+    localStorage.setItem("userDetailsArray", JSON.stringify(userDetails));
     localStorage.setItem("userDetailsArray", JSON.stringify(storedData));
   
     tableBody.innerHTML = `<tr>
